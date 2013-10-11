@@ -1,4 +1,12 @@
 <div class="hero-unit">
 	<h1>Welcome to worbench view</h1>
-	<div id=""></div>
+	<div id="listContainer">
+		<input type="text" ngModel="{pollTitle}"></input>
+		<ol id="list">
+			<li ng-repeat="item in items">{{item}}</li>
+		</ol>
+		<input type="text" ngModel="{newItem}"></input>
+		<button ng-click="addItem()">Add</button>
+	</div>
+	<button ng-click="savePoll()">Save Poll</button>
 </div>

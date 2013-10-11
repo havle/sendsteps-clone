@@ -7,6 +7,10 @@ angular.module('sendstepsCloneApp', [])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
+      .when('/workbench', {
+        templateUrl: 'views/workbench/workbench.html',
+        controller: 'WorkBenchCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sendstepsCloneApp', [])
+angular.module('sendstepsCloneApp', ['firebase'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {

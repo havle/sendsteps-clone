@@ -1,12 +1,15 @@
-<div class="hero-unit">
+<div class="hero-unit" ng-init="resetVars()">
 	<h1>Welcome to worbench view</h1>
 	<div id="listContainer">
-		<input type="text" ngModel="{pollTitle}"></input>
+		<input type="text" ng-model="pollTitle"></input>
 		<ol id="list">
 			<li ng-repeat="item in items">{{item}}</li>
 		</ol>
-		<input type="text" ngModel="{newItem}"></input>
+		<input type="text" ng-model="newItem"></input>
 		<button ng-click="addItem()">Add</button>
 	</div>
 	<button ng-click="savePoll()">Save Poll</button>
+	<div id="pollsList">
+		<li ng-repeat="poll in polls">{{poll.title}}</li>
+	</div>
 </div>

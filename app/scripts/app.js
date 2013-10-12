@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sendstepsCloneApp', ['firebase'])
+angular.module('sendstepsCloneApp', ['firebase','angular-underscore','angular-selectize', 'ui','firebaseResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -15,3 +15,7 @@ angular.module('sendstepsCloneApp', ['firebase'])
         redirectTo: '/'
       });
   });
+  
+
+angular.module('firebaseResource', []).
+  value('firebase', (new Firebase('https://sendsteps.firebaseio.com/')));

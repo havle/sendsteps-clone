@@ -1,38 +1,47 @@
 'use strict';
 
 angular.module('sendstepsCloneApp')
-	.controller('WorkBenchCtrl', ['$scope', 'angularFire', '_',function($scope, angularFire, _) {
-		$scope.polls=[];
-		var ref = new Firebase('https://sendsteps.firebaseio.com/polls');
-		angularFire(ref, $scope, 'polls');
+	.controller('WorkBenchCtrl', ['$scope', 'angularFireCollection',function($scope, angularFireCollection) {
+		
 
-		$scope.addItem = function(){
-			if(angular.isUndefined($scope.newItem)
-				|| $scope.newItem == "")
+		$scope.addItem = function(poll){
+			if(angular.isUndefined($scope.newPollItem)	
+				|| $scope.newPollItem == "")
 				return;
-			$scope.items.push($scope.newItem);
-			$scope.newItem = "";
+			$scope.newPollItem = poll.items.add({text:""});// new item
+			$scope.polls.update(poll);
+			
 		};
 
-		$scope.savePoll = function(){
-			if($scope.items.count <= 0)
-				return;
-
-			if($scope.pollTitle == "")
+		$scope.addPoll = function(){
+			var title = $scope.newPollTitle;
+			if(title === ''
+				|| angular.isUndefined(title))
 			{
-				// TODO: change this to nice flash up top
-				alert("Must include a poll title");
+				title = "Untitled Poll";
 			}
-			var existing = _.find($scope.polls, function(item){item.title == $scope.pollTitle});
-			if(isUndefined(existing))
-			{
-				$scope.polls.push({"title": $scope.pollTitle, "items": $scope.items});	
-			}	
 
-			$scope.resetVars();
+			$scope.polls.add({title: title, items: {}});
 		}
 
-		$scope.resetVars = function(){
-			$scope.items = [];
-			$scope.pollTitle = "";
+		$scope.workbenchInit = function(){
+			var ref = new Firebase('https://sendsteps.firebaseio.com/polls');
+			$scope.polls= angularFireCollection(ref);
+		}
+
+		$scope.editPoll = function(poll){
+
+			$scope.editingPoll = poll;
+			if(!$scope.editingPoll.items)
+			{
+				$scope.editingPoll.items = 	{};
+			}
+			$scope.editingPoll.items.add({text:""});
+		}
+		$scope.doneEditting = function(poll){
+			// Save the currenty edting poll
+			$scope.polls.update(poll);
+			// set edditingPoll to null
+		}
+		
 	}]);

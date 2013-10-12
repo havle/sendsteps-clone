@@ -1,6 +1,27 @@
-<div class="hero-unit" ng-init="resetVars()">
+<div class="hero-unit" ng-init="workbenchInit()">
 	<h1>Welcome to worbench view</h1>
-	<div id="listContainer">
+	
+	<div id="newPollView">
+		<form ng-submit="addPoll()">
+					<input type="text" placeholder="Add new poll" ng-model="newPollTitle">
+					<input class="btn btn-primary" type="submit" value="Add">
+		</form>
+		<ul class="poll-list">
+			<li class="poll" ng-repeat="poll in polls" ng-class="{editing: poll == editingPoll}" >
+				<input type="text" ng-model="poll.title" ui-event="{blur: 'doneEditting(poll)', focus : 'editPoll(poll)'}">
+				<ol class="item-list">
+					<li class="item" ng-repeat="item in poll.items">
+						<input type="text" ng-model="item.text" >
+					</li>
+					<input type="text" placeholder="Add new item" ng-model="newPollItem" ui-keyup="{'enter tab':'addItem(poll)'}">
+				</ol>
+			</li>
+		</ul>
+
+	</div>
+
+	<!-- <div id="listContainer">
+
 		<input type="text" ng-model="pollTitle"></input>
 		<ol id="list">
 			<li ng-repeat="item in items">{{item}}</li>
@@ -11,7 +32,5 @@
 	<button class="btn" ng-click="savePoll()">
 		<i class="icon-facebook"></i>Save Poll
 	</button>
-	<div id="pollsList">
-		<li ng-repeat="poll in polls">{{poll.title}}</li>
-	</div>
+ -->
 </div>

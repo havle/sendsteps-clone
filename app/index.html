@@ -13,6 +13,8 @@
 
         <!-- build:css(.tmp) styles/main.css -->
         <link rel="stylesheet" href="styles/main.css">
+        <link rel="stylesheet" href="bower_components/selectize/dist/css/selectize.css">
+        <link rel="stylesheet" href="bower_components/angular-ui/build/angular-ui.min.css">
         <!-- endbuild -->
 </head>
   <body ng-app="sendstepsCloneApp">
@@ -59,11 +61,17 @@
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
+        <script src="bower_components/angular-ui/build/angular-ui.min.js"></script>
         <script src="bower_components/angular-resource/angular-resource.js"></script>
         <script src="bower_components/angular-cookies/angular-cookies.js"></script>
         <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/underscore/underscore-min.js"></script>
+        <script src="bower_components/angular-underscore/angular-underscore.js"></script>
+        <script src="bower_components/selectize/dist/js/standalone/selectize.js"></script>
+        <script src="bower_components/angular-selectize/angular-selectize.js"></script>
         <script src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.js"></script>
+
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->

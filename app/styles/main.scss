@@ -30,3 +30,13 @@ body {
     line-height: 1;
     letter-spacing: -1px;
 }
+
+li .item-list {
+    display: none;
+}
+li.editing .item-list {
+    display: block;
+}
+ol.item-list{
+    list-style: none;
+}

@@ -7,14 +7,19 @@
 					<input class="btn btn-primary" type="submit" value="Add">
 		</form>
 		<ul class="poll-list">
-			<li class="poll" ng-repeat="poll in polls" ng-class="{editing: poll == editingPoll}" >
-				<input type="text" ng-model="poll.title" ui-event="{blur: 'doneEditting(poll)', focus : 'editPoll(poll)'}">
-				<ol class="item-list">
-					<li class="item" ng-repeat="item in poll.items">
-						<input type="text" ng-model="item.text" >
-					</li>
-					<input type="text" placeholder="Add new item" ng-model="newPollItem" ui-keyup="{'enter tab':'addItem(poll)'}">
-				</ol>
+			<li class="poll" ng-repeat="poll in presentation._polls" ng-class="{editing: poll == editingPoll}" >
+				<form ng-submit="newPollItem(poll)">
+					<input type="text" ng-model="poll.title" ui-event="{ focus : 'editPoll(poll)'}">
+					<ol class="item-list">
+						<li class="item" ng-repeat="item in poll._pollitems">
+							<input type="text" ng-model="item.text" ui-keydown="{'enter tab':'addItem(item)'}" ui-event="{blur: 'addItem(item)'">
+							
+						</li>
+						<!-- <input type="text" placeholder="Add new item" ng-model="newPollItem" ui-keyup="{'enter tab':'addItem(poll)'}"> -->
+					</ol>
+				
+					<input type="submit" class="btn btn-primary" value="New item">
+				</form>
 			</li>
 		</ul>
 

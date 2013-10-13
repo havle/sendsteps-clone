@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('sendstepsCloneApp', ['firebase','angular-underscore','angular-selectize', 'ui','firebaseResource'])
+angular.module('sendstepsCloneApp', ['angular-underscore','angular-selectize', 'ui','sendstepsFB','WorkBenchCtrl'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -14,8 +14,23 @@ angular.module('sendstepsCloneApp', ['firebase','angular-underscore','angular-se
       .otherwise({
         redirectTo: '/'
       });
-  });
-  
+  })
+  .run(function($rootScope, firebase) {
 
-angular.module('firebaseResource', []).
+    // reset the database every time
+    firebase.remove();
+
+    $rootScope.safeApply = function(fn) {
+      var phase = this.$root.$$phase;
+      if(phase == '$apply' || phase == '$digest') {
+        if(fn && (typeof(fn) === 'function')) {
+          fn();
+        }
+      } else {
+        this.$apply(fn);
+      }
+    };
+  });
+
+angular.module('sendstepsFB', []).
   value('firebase', (new Firebase('https://sendsteps.firebaseio.com/')));
